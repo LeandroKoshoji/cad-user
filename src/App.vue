@@ -7,6 +7,7 @@
 :root {
   --clr-background: #f5f5f5;
   --clr-primary: #2d3f51;
+  --clr-secundary:#f8ae17;
   --clr-accent: #ff6854;
   --clr-txt-primary: #2d3f51;
   --clr-txt-secundary: #f5f5f5;
@@ -28,6 +29,7 @@ body {
 a{
   cursor: pointer;
   color: inherit;
+  text-decoration: none;
 }
 
 .container {

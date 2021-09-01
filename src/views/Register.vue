@@ -11,7 +11,7 @@
                 </div>
                 <div class="form__item">
                     <label for="password">Senha:</label>
-                    <input type="password" id="password" required >
+                    <input type="password" id="password" placeholder="********" required >
                 </div>
             </div>
 
@@ -83,7 +83,7 @@ name: 'Register',
 <style lang="scss" scoped>
 .register {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,7 +125,7 @@ name: 'Register',
         justify-content: space-between;
         align-items: center;
 
-        @media (max-width: 768px) {
+        @media (max-width: 825px) {
         flex-direction: column;
         }
       }
@@ -134,7 +134,7 @@ name: 'Register',
         display: grid;
         grid-template-columns: repeat(2, 1fr);
 
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
           grid-template-columns: auto;
         }
       }
@@ -175,23 +175,24 @@ name: 'Register',
     }
 
     &__btn {
-            font-size: 1rem;
-            padding: .5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: var(--box-shadow);
+      min-width: 200px;
+      font-size: 1rem;
+      padding: .5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--box-shadow);
 
-            &.accent {
-                background-color: var(--clr-accent);
-                color: var(--clr-txt-secundary);
-            }
-        }
+      &.accent {
+          background-color: var(--clr-accent);
+          color: var(--clr-txt-secundary);
+      }
+    }
 
-        &__call {
-            text-align: center;
-        }
+    &__call {
+      text-align: center;
+    }
   }
 }
 </style>

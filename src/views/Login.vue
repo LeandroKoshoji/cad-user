@@ -11,7 +11,7 @@
                 </div>
                 <div class="form__item">
                     <label for="password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="password" required >
+                    <input type="password" id="password" placeholder="********" required >
                 </div>
                 <button type="submit" class="form__btn accent">Login</button>
                 <p class="form__call">Ainda não possui uma conta? <router-link to="/register">Cadastre-se</router-link></p>
@@ -28,8 +28,8 @@ name: 'Login',
 
 <style lang="scss" scoped>
 .login {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,6 +38,7 @@ name: 'Login',
     &__welcome {
         text-align: center;
         font-size: 2.5rem;
+        margin-bottom: 1rem;
 
         &--small{
             text-align: center;
