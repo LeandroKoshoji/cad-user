@@ -43,11 +43,11 @@
               </div>
               <div class="form__item">
                   <label for="adressNumber">Nº:</label>
-                  <input type="number" id="adressNumber" required placeholder="123" v-model="userData.adressNumber">
+                  <input type="number" id="adressNumber" placeholder="123" v-model="userData.adressNumber">
               </div>
               <div class="form__item">
                   <label for="adressComplement">Complemento:</label>
-                  <input type="text" id="adressComplement" required placeholder="Apt 321" v-model="userData.adressComplement">
+                  <input type="text" id="adressComplement" placeholder="Apt 321" v-model="userData.adressComplement">
               </div>
               <div class="form__item">
                   <label for="district">Bairro:</label>
