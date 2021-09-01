@@ -10,25 +10,28 @@
   --clr-accent: #ff6854;
   --clr-txt-primary: #2d3f51;
   --clr-txt-secundary: #f5f5f5;
+  --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;
 }
 *{
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
 body {
   background-color: var(--clr-background);
   color: var(--clr-txt-primary);
-  min-height: 100vw;
+  min-height: 100vh;
   width: 100%;
 }
 
 a{
+  cursor: pointer;
   color: inherit;
 }
 
 .container {
-  width: Min(90% , 70rem);
+  width: Min(90%, 70rem);
   margin: 0 auto;
 }
 </style>
