@@ -1,17 +1,17 @@
 <template>
   <div class="register">
       <div class="container">
-          <form class="form">
+          <form class="form" @submit.prevent="log(userData)">
             <span class="form__tag">Cadastre-se</span>
             <div class="form__section flex">
               <h3 class="form__section__title">Dados de Acesso:</h3>
                 <div class="form__item">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required >
+                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required v-model="userData.email">
                 </div>
                 <div class="form__item">
                     <label for="password">Senha:</label>
-                    <input type="password" id="password" placeholder="********" required >
+                    <input type="password" id="password" placeholder="********" required v-model="userData.password">
                 </div>
             </div>
 
@@ -19,55 +19,55 @@
               <h3 class="form__section__title">Dados Cadastrais:</h3>
                 <div class="form__item">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" placeholder="nome" required >
+                    <input type="text" id="name" placeholder="nome" required v-model="userData.name">
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
-                    <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required >
+                    <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userData.cpf">
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
-                    <input type="number" id="pis" required >
+                    <input type="number" id="pis" required v-model="userData.pis">
                 </div>
             </div>
 
             <div class="form__section grid">
               <h3 class="form__section__title">Endereço:</h3>
               <div class="form__item">
-                  <label for="cep">CEP:</label>
-                  <input type="text" id="cep" placeholder="8 digitos - apenas numeros" required >
+                  <label for="postCode">CEP:</label>
+                  <input type="text" id="postCode" placeholder="8 digitos - apenas numeros" required v-model="userData.postCode">
               </div>
               <div class="form__item">
-                  <label for="adress">Rua:</label>
-                  <input type="text" id="adress" required placeholder="Rua ficticia">
+                  <label for="street">Rua:</label>
+                  <input type="text" id="street" required placeholder="Rua ficticia" v-model="userData.street">
               </div>
               <div class="form__item">
                   <label for="adressNumber">Nº:</label>
-                  <input type="number" id="adressNumber" required placeholder="123">
+                  <input type="number" id="adressNumber" required placeholder="123" v-model="userData.adressNumber">
               </div>
               <div class="form__item">
                   <label for="adressComplement">Complemento:</label>
-                  <input type="text" id="adressComplement" required placeholder="Apt 321">
+                  <input type="text" id="adressComplement" required placeholder="Apt 321" v-model="userData.adressComplement">
               </div>
               <div class="form__item">
                   <label for="district">Bairro:</label>
-                  <input type="text" id="district" required placeholder="Centro">
+                  <input type="text" id="district" required placeholder="Centro" v-model="userData.district">
               </div>
               <div class="form__item">
                   <label for="city">Município:</label>
-                  <input type="text" id="city" required placeholder="São Paulo">
+                  <input type="text" id="city" required placeholder="São Paulo" v-model="userData.city">
               </div>
               <div class="form__item">
                   <label for="region">Estado:</label>
-                  <input type="text" id="region" required placeholder="SP">
+                  <input type="text" id="region" required placeholder="SP" v-model="userData.region">
               </div>
               <div class="form__item">
-                  <label for="pais">País:</label>
-                  <input type="text" id="pais" required placeholder="Brasil">
+                  <label for="country">País:</label>
+                  <input type="text" id="country" required placeholder="Brasil" v-model="userData.country">
               </div>
             </div>
 
-            <button type="submit" class="form__btn accent">Cadastrar</button>
+            <button type="submit" class="form__btn accent" >Cadastrar</button>
             <p class="form__call">Já possui uma conta? <router-link to="/login">Login</router-link></p>
           </form>
       </div>
@@ -75,8 +75,30 @@
 </template>
 
 <script>
+import { reactive } from 'vue'
 export default {
 name: 'Register',
+
+setup(){
+  const userData = reactive({
+    email: '',
+    password: '',
+    name: '',
+    cpf: 0,
+    pis: 0,
+    postCode: 0,
+    street: '',
+    adressNumber: 0,
+    adressComplement: '',
+    district: '',
+    city: '',
+    region: '',
+    country: ''
+  })
+
+  const log = (value) => console.log(value)
+  return { userData, log }
+}
 }
 </script>
 
