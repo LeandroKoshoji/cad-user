@@ -34,4 +34,6 @@ a{
   width: Min(90%, 70rem);
   margin: 0 auto;
 }
+
+
 </style>

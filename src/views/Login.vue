@@ -14,7 +14,7 @@
                     <input type="password" id="password" required >
                 </div>
                 <button type="submit" class="form__btn accent">Login</button>
-                <p class="form__register-call">Ainda não possui uma conta? <router-link to="/register">Cadastre-se</router-link></p>
+                <p class="form__call">Ainda não possui uma conta? <router-link to="/register">Cadastre-se</router-link></p>
           </form>
       </div>
   </div>
@@ -48,7 +48,7 @@ name: 'Login',
 
     .form {
         border: 3px solid var(--clr-primary);
-        border-radius: 10px;
+        border-radius: 5px;
         margin: 2rem auto 0;
         padding: 2rem 1rem 0;
         max-width: 500px;
@@ -108,7 +108,7 @@ name: 'Login',
             }
         }
 
-        &__register-call {
+        &__call {
             text-align: center;
         }
     }
