@@ -1,6 +1,8 @@
 <template>
   <div class="login">
-      <h1>login</h1>
+      <div class="container">
+          <h1>login</h1>
+      </div>
   </div>
 </template>
 
