@@ -21,8 +21,14 @@ const auth = firebase.auth()
 
 export const authError = reactive({
     isError: false,
-    errorMessage: ''
+    message: ''
 })
+
+export const clearAuthError = () => {
+    authError.isError = false;
+    authError.errorMessage = ''
+}
+
 const getAuthErrorMessage = errorCode => ({
     "auth/email-already-in-use": "Erro: e-mail já cadastro",
     "auth/invalid-email": "Erro: e-mail inválido",
@@ -38,7 +44,8 @@ export const createUser = user => {
             usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""}))
         })
         .catch(error => {
-            authError.errorMessage = getAuthErrorMessage(error.code)
+            authError.isError = true
+            authError.message = getAuthErrorMessage(error.code)
         })
 }
 

@@ -1,6 +1,9 @@
 <template>
   <div class="register">
       <div class="container">
+          <ErrorModal :isActive="authError.isError" @closeModal="clearAuthError">
+            <h1>{{authError.message}}</h1>
+          </ErrorModal>
           <form class="form" @submit.prevent="handleSubmit()">
             <span class="form__tag">Cadastre-se</span>
             <div class="form__section flex">
@@ -108,15 +111,17 @@
 </template>
 
 <script>
+import ErrorModal from '@/components/ErrorModal.vue'
+import ErrorSpan from '@/components/ErrorSpan.vue'
+
 import { registerRules } from '@/composables/useFormRules.js'
 import useVuelidate from '@vuelidate/core'
 import { reactive} from 'vue'
-import { createUser } from '@/Firebase.js'
+import { createUser, authError, clearAuthError } from '@/Firebase.js'
 
-import ErrorSpan from '@/components/ErrorSpan.vue'
 export default {
 name: 'Register',
-components: { ErrorSpan },
+components: { ErrorSpan, ErrorModal },
 setup(){
   const userData = reactive({
     email: '',
@@ -144,7 +149,7 @@ setup(){
       alert('Nao foi')
     }
   }
-  return { userData, v$, handleSubmit }
+  return { userData, v$, handleSubmit, authError, clearAuthError }
 }
 }
 </script>
