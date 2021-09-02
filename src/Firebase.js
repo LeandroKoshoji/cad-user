@@ -35,7 +35,7 @@ const getAuthErrorMessage = errorCode => ({
     "auth/operation-not-allowed": "Erro: operação não autorizada",
     "auth/weak-password": "Erro: senha muito fraca",
     "auth/user-disabled": "Erro:  email utilizado foi desabilitado em nosso sistema, por favor, faça um novo cadastro",
-    "auth/user-not-found": "Erro: usuário não encontrado, verifique o e-mail digitado, ou cadastra-se para acessar a aplicação",
+    "auth/user-not-found": "Erro: usuário não encontrado, verifique o e-mail digitado, ou cadastre-se para acessar a aplicação",
     "auth/wrong-password": "Erro: senha incorreta"
 
 })[errorCode] || 'Erro inesperado, tente novamente'
@@ -53,6 +53,12 @@ export const createUser = user => {
         })
 }
 
-
-
+export const doLogin = (user) => {
+    auth.signInWithEmailAndPassword(user.email, user.password)
+        .then()
+        .catch(error => {
+            authError.isError = true
+            authError.message = getAuthErrorMessage(error.code)
+        })
+}
 export const doLogout = () => auth.signOut()

@@ -1,17 +1,20 @@
 <template>
   <div class="login">
       <div class="container">
+        <ErrorModal v-show="authError.isError" @closeModal="clearAuthError">
+            <h3>{{authError.message}}</h3>    
+        </ErrorModal>
           <h1 class="login__welcome">Olá Visitante,</h1>
           <h2 class="login__welcome--small">Faça o Login ou Cadastre-se para acessar o conteudo.</h2>
-          <form class="form">
+          <form class="form" @submit.prevent="handleSubmit">
                 <span class="form__tag">Login</span>
                 <div class="form__item">
                     <label for="email"><i class="fas fa-envelope"></i></label>
-                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required v-model="email">
+                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required v-model="userData.email">
                 </div>
                 <div class="form__item">
                     <label for="password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="password" placeholder="********" required v-model="password">
+                    <input type="password" id="password" placeholder="********" required v-model="userData.password">
                 </div>
                 <button type="submit" class="form__btn accent">Login</button>
                 <p class="form__call">Ainda não possui uma conta? <router-link to="/register">Cadastre-se</router-link></p>
@@ -21,16 +24,23 @@
 </template>
 
 <script>
+import ErrorModal from '@/components/ErrorModal.vue'
 import { reactive } from 'vue'
+import { doLogin, authError, clearAuthError } from '@/Firebase.js'
 export default {
 name: 'Login',
+components: { ErrorModal },
 setup(){
     const userData = reactive({
         email: "",
         password: "",
     })
 
-    return { userData }
+    const handleSubmit = () => {
+        doLogin(userData)
+    }
+
+    return { userData, handleSubmit, authError, clearAuthError }
 }
 }
 </script>

@@ -45,7 +45,8 @@ setup(props, { emit }) {
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        padding: 2rem 0;
+        padding: 2rem .5rem;
+        text-align: center;
     }
 
     &__btn {
@@ -58,6 +59,7 @@ setup(props, { emit }) {
       cursor: pointer;
       box-shadow: var(--box-shadow);
       background-color: var(--clr-accent);
+      color: var(--clr-txt-secundary)
     }
 }
 </style>
