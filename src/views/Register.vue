@@ -9,14 +9,14 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" placeholder="exemplo@ex.com.br" required v-model="userData.email">
                     <div v-if="v$.email.$error">
-                        <span v-for="error in v$.email.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.email.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
                 <div class="form__item">
                     <label for="password">Senha:</label>
                     <input type="password" id="password" placeholder="********" required v-model="userData.password">
                     <div v-if="v$.password.$error">
-                        <span v-for="error in v$.password.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.password.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
             </div>
@@ -27,21 +27,21 @@
                     <label for="name">Nome:</label>
                     <input type="text" id="name" placeholder="nome" required v-model="userData.name">
                     <div v-if="v$.name.$error">
-                        <span v-for="error in v$.name.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.name.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
                     <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userData.cpf">
                     <div v-if="v$.cpf.$error">
-                        <span v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
                     <input type="number" id="pis" required v-model="userData.pis">
                     <div v-if="v$.pis.$error">
-                        <span v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
             </div>
@@ -52,14 +52,14 @@
                   <label for="postCode">CEP:</label>
                   <input type="text" id="postCode" placeholder="8 digitos - apenas numeros" required v-model="userData.postCode">
                   <div v-if="v$.postCode.$error">
-                        <span v-for="error in v$.postCode.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.postCode.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
               <div class="form__item">
                   <label for="street">Rua:</label>
                   <input type="text" id="street" required placeholder="Rua ficticia" v-model="userData.street">
                   <div v-if="v$.street.$error">
-                        <span v-for="error in v$.street.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.street.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
               <div class="form__item">
@@ -74,28 +74,28 @@
                   <label for="district">Bairro:</label>
                   <input type="text" id="district" required placeholder="Centro" v-model="userData.district">
                   <div v-if="v$.district.$error">
-                        <span v-for="error in v$.district.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.district.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
               <div class="form__item">
                   <label for="city">Município:</label>
                   <input type="text" id="city" required placeholder="São Paulo" v-model="userData.city">
                   <div v-if="v$.city.$error">
-                        <span v-for="error in v$.city.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.city.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
               <div class="form__item">
                   <label for="region">Estado:</label>
                   <input type="text" id="region" required placeholder="SP" v-model="userData.region">
                   <div v-if="v$.region.$error">
-                        <span v-for="error in v$.region.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.region.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
               <div class="form__item">
                   <label for="country">País:</label>
                   <input type="text" id="country" required placeholder="Brasil" v-model="userData.country">
                   <div v-if="v$.country.$error">
-                        <span v-for="error in v$.country.$errors" :key="error.$uid"> {{error.$message}}</span>
+                        <ErrorSpan v-for="error in v$.country.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
             </div>
@@ -110,11 +110,12 @@
 <script>
 import { registerRules } from '@/composables/useFormRules.js'
 import useVuelidate from '@vuelidate/core'
-
 import { reactive} from 'vue'
+
+import ErrorSpan from '@/components/ErrorSpan.vue'
 export default {
 name: 'Register',
-
+components: { ErrorSpan },
 setup(){
   const userData = reactive({
     email: '',
@@ -137,7 +138,7 @@ setup(){
 
   const handleSubmit = () => {
     if(!v$.value.$error) {
-      alert('Login')
+      alert('criar') // função de Criar Usuário no FB
     } else {
       alert('Nao foi')
     }
