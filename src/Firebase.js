@@ -33,7 +33,11 @@ const getAuthErrorMessage = errorCode => ({
     "auth/email-already-in-use": "Erro: e-mail já cadastro",
     "auth/invalid-email": "Erro: e-mail inválido",
     "auth/operation-not-allowed": "Erro: operação não autorizada",
-    "auth/weak-password": "Erro: senha muito fraca"
+    "auth/weak-password": "Erro: senha muito fraca",
+    "auth/user-disabled": "Erro:  email utilizado foi desabilitado em nosso sistema, por favor, faça um novo cadastro",
+    "auth/user-not-found": "Erro: usuário não encontrado, verifique o e-mail digitado, ou cadastra-se para acessar a aplicação",
+    "auth/wrong-password": "Erro: senha incorreta"
+
 })[errorCode] || 'Erro inesperado, tente novamente'
 
 export const createUser = user => {
@@ -48,5 +52,7 @@ export const createUser = user => {
             authError.message = getAuthErrorMessage(error.code)
         })
 }
+
+
 
 export const doLogout = () => auth.signOut()
