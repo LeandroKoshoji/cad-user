@@ -114,9 +114,9 @@
 import ErrorModal from '@/components/ErrorModal.vue'
 import ErrorSpan from '@/components/ErrorSpan.vue'
 
-import { registerRules } from '@/composables/useFormRules.js'
 import useVuelidate from '@vuelidate/core'
-import { reactive} from 'vue'
+import { registerRules } from '@/composables/useFormRules.js'
+import { reactive } from 'vue'
 import { createUser, authError, clearAuthError } from '@/Firebase.js'
 
 export default {
@@ -145,9 +145,8 @@ setup(){
   const handleSubmit = () => {
     if(!v$.value.$error) {
       createUser(userData)
-    } else {
-      alert('Nao foi')
-    }
+      return
+    } 
   }
   return { userData, v$, handleSubmit, authError, clearAuthError }
 }
