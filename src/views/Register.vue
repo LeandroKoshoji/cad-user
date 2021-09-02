@@ -1,17 +1,23 @@
 <template>
   <div class="register">
       <div class="container">
-          <form class="form" @submit.prevent="log(userData)">
+          <form class="form" @submit.prevent="handleSubmit()">
             <span class="form__tag">Cadastre-se</span>
             <div class="form__section flex">
               <h3 class="form__section__title">Dados de Acesso:</h3>
                 <div class="form__item">
                     <label for="email">Email:</label>
                     <input type="email" id="email" placeholder="exemplo@ex.com.br" required v-model="userData.email">
+                    <div v-if="v$.email.$error">
+                        <span v-for="error in v$.email.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
                 </div>
                 <div class="form__item">
                     <label for="password">Senha:</label>
                     <input type="password" id="password" placeholder="********" required v-model="userData.password">
+                    <div v-if="v$.password.$error">
+                        <span v-for="error in v$.password.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
                 </div>
             </div>
 
@@ -20,14 +26,23 @@
                 <div class="form__item">
                     <label for="name">Nome:</label>
                     <input type="text" id="name" placeholder="nome" required v-model="userData.name">
+                    <div v-if="v$.name.$error">
+                        <span v-for="error in v$.name.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
                     <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userData.cpf">
+                    <div v-if="v$.cpf.$error">
+                        <span v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
                     <input type="number" id="pis" required v-model="userData.pis">
+                    <div v-if="v$.pis.$error">
+                        <span v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
                 </div>
             </div>
 
@@ -36,10 +51,16 @@
               <div class="form__item">
                   <label for="postCode">CEP:</label>
                   <input type="text" id="postCode" placeholder="8 digitos - apenas numeros" required v-model="userData.postCode">
+                  <div v-if="v$.postCode.$error">
+                        <span v-for="error in v$.postCode.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="street">Rua:</label>
                   <input type="text" id="street" required placeholder="Rua ficticia" v-model="userData.street">
+                  <div v-if="v$.street.$error">
+                        <span v-for="error in v$.street.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="adressNumber">Nº:</label>
@@ -52,18 +73,30 @@
               <div class="form__item">
                   <label for="district">Bairro:</label>
                   <input type="text" id="district" required placeholder="Centro" v-model="userData.district">
+                  <div v-if="v$.district.$error">
+                        <span v-for="error in v$.district.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="city">Município:</label>
                   <input type="text" id="city" required placeholder="São Paulo" v-model="userData.city">
+                  <div v-if="v$.city.$error">
+                        <span v-for="error in v$.city.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="region">Estado:</label>
                   <input type="text" id="region" required placeholder="SP" v-model="userData.region">
+                  <div v-if="v$.region.$error">
+                        <span v-for="error in v$.region.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="country">País:</label>
                   <input type="text" id="country" required placeholder="Brasil" v-model="userData.country">
+                  <div v-if="v$.country.$error">
+                        <span v-for="error in v$.country.$errors" :key="error.$uid"> {{error.$message}}</span>
+                    </div>
               </div>
             </div>
 
@@ -75,7 +108,10 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { registerRules } from '@/composables/useFormRules.js'
+import useVuelidate from '@vuelidate/core'
+
+import { reactive} from 'vue'
 export default {
 name: 'Register',
 
@@ -84,11 +120,11 @@ setup(){
     email: '',
     password: '',
     name: '',
-    cpf: 0,
-    pis: 0,
-    postCode: 0,
+    cpf: null,
+    pis: null,
+    postCode: null,
     street: '',
-    adressNumber: 0,
+    adressNumber: null,
     adressComplement: '',
     district: '',
     city: '',
@@ -96,8 +132,17 @@ setup(){
     country: ''
   })
 
-  const log = (value) => console.log(value)
-  return { userData, log }
+  const v$ = useVuelidate(registerRules, userData)
+  v$.value.$validate()
+
+  const handleSubmit = () => {
+    if(!v$.value.$error) {
+      alert('Login')
+    } else {
+      alert('Nao foi')
+    }
+  }
+  return { userData, v$, handleSubmit }
 }
 }
 </script>
@@ -183,12 +228,14 @@ setup(){
 
       & input {
         flex: 1;
+        max-height: 30px;
         border: 1px solid var(--clr-primary);
         border-radius: 5px;
         background-color: transparent;
         outline: none;
         font-size: 1rem;
         padding: .25rem .5rem;
+        color: var(--clr-txt-primary);
 
         &::placeholder {
           font-style: italic;
