@@ -3,8 +3,25 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app'
+import { onBeforeMount } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
+
 export default {
- 
+ setup(){
+  const route = useRoute()
+  const router = useRouter()
+
+  const redirectIfNotLoggedIn = firebase.auth().onAuthStateChanged((user) => {
+    if(!user) {
+      router.replace('/login')
+    } else if (route.path === '/login' || route.path === '/register') {
+      router.replace('/')
+    }
+  })
+  
+  onBeforeMount(()=> redirectIfNotLoggedIn)
+ }
 }
 </script>
 <style lang="scss">
@@ -34,7 +51,6 @@ body {
 a{
   cursor: pointer;
   color: inherit;
-  text-decoration: none;
 }
 
 .container {
