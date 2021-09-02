@@ -5,17 +5,20 @@
       <h2 class="home__welcome--small">O que deseja fazer?</h2>
       <div class="home__buttons">
         <router-link to="/edit/123" type="button" class="home__buttons__btn neutral">Editar cadastro</router-link>
-        <button type="button" class="home__buttons__btn accent">Sair</button>
+        <button type="button" class="home__buttons__btn accent" @click="doLogout">Sair</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+import { doLogout } from '@/Firebase.js'
 export default {
   name: 'Home',
-  
+  setup() {
+
+    return { doLogout }
+  }
 }
 </script>
 

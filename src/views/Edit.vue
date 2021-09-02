@@ -171,6 +171,7 @@ name: 'Edit',
 
         &::placeholder {
           font-style: italic;
+          font-size: .75rem;
         }
       }
     }

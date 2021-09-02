@@ -111,6 +111,7 @@
 import { registerRules } from '@/composables/useFormRules.js'
 import useVuelidate from '@vuelidate/core'
 import { reactive} from 'vue'
+import { createUser } from '@/Firebase.js'
 
 import ErrorSpan from '@/components/ErrorSpan.vue'
 export default {
@@ -138,7 +139,7 @@ setup(){
 
   const handleSubmit = () => {
     if(!v$.value.$error) {
-      alert('criar') // função de Criar Usuário no FB
+      createUser(userData)
     } else {
       alert('Nao foi')
     }
@@ -240,6 +241,7 @@ setup(){
 
         &::placeholder {
           font-style: italic;
+          font-size: .75rem;
         }
       }
     }
