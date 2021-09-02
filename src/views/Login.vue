@@ -7,11 +7,11 @@
                 <span class="form__tag">Login</span>
                 <div class="form__item">
                     <label for="email"><i class="fas fa-envelope"></i></label>
-                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required >
+                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required v-model="email">
                 </div>
                 <div class="form__item">
                     <label for="password"><i class="fas fa-lock"></i></label>
-                    <input type="password" id="password" placeholder="********" required >
+                    <input type="password" id="password" placeholder="********" required v-model="password">
                 </div>
                 <button type="submit" class="form__btn accent">Login</button>
                 <p class="form__call">Ainda não possui uma conta? <router-link to="/register">Cadastre-se</router-link></p>
@@ -21,8 +21,17 @@
 </template>
 
 <script>
+import { reactive } from 'vue'
 export default {
 name: 'Login',
+setup(){
+    const userData = reactive({
+        email: "",
+        password: "",
+    })
+
+    return { userData }
+}
 }
 </script>
 
