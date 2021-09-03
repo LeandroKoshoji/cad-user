@@ -3,7 +3,6 @@
       <div class="container">
           <form class="form">
             <span class="form__tag">Cadastre-se</span>
-
             <div class="form__section flex">
               <h3 class="form__section__title">Dados Cadastrais:</h3>
                 <div class="form__item">
@@ -112,9 +111,11 @@ setup(){
   const userUID = route.params.id
 
   const v$ = useVuelidate(registerRules, userFromDB)
-  v$.value.$validate()
-
-  onBeforeMount(async ()=> userFromDB.value = await getUserFromDB(userUID))
+  
+  onBeforeMount(async ()=> {
+    userFromDB.value = await getUserFromDB(userUID)
+    v$.value.$validate()
+  })
 
   return { v$, userFromDB }
 }

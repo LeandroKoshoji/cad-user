@@ -42,8 +42,14 @@ const getAuthErrorMessage = errorCode => ({
 })[errorCode] || 'Erro inesperado, tente novamente'
 
 export const getUserFromDB = async uid => {
+   try{
     const userDoc = await usersCollection.doc(uid).get()
-    return userDoc ? userDoc.data() : 'Erro'
+
+    return userDoc.data()
+   }catch (error) {
+    authError.isError = true
+    authError.message = getAuthErrorMessage(error.code)
+   }
 }
 
 export const createUser = async user => {
@@ -52,7 +58,7 @@ export const createUser = async user => {
         const uid = res.user.uid
 
         usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""}))
-        
+
         const userDoc = await getUserFromDB(uid)
         loggedUser.value = {...userDoc, uid}
     } catch(error) {
@@ -60,6 +66,15 @@ export const createUser = async user => {
         authError.message = getAuthErrorMessage(error.code)
     }
 }
+
+export const updateUser = async (uid, user) => {
+    try{
+     await usersCollection.doc(uid).update(user)
+    }catch (error) {
+     authError.isError = true
+     authError.message = getAuthErrorMessage(error.code)
+    }
+ }
 
 export const doLogin = async (user) => {
     try{

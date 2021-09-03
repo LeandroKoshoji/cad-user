@@ -116,6 +116,7 @@ import ErrorSpan from '@/components/ErrorSpan.vue'
 
 import useVuelidate from '@vuelidate/core'
 import { registerRules } from '@/composables/useFormRules.js'
+
 import { reactive } from 'vue'
 import { createUser, authError, clearAuthError } from '@/Firebase.js'
 
