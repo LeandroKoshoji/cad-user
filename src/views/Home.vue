@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import { loggedUser } from '@/composables/useLoggedUser.js'
+import useLoggedUser from '@/composables/useLoggedUser.js'
 import { doLogout } from '@/Firebase.js'
 
 export default {
   name: 'Home',
   setup() {
-    
+    const { loggedUser } = useLoggedUser()
     return { doLogout, loggedUser }
   }
 }

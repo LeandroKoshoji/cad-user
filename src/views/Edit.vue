@@ -106,12 +106,13 @@ import { registerRules } from '@/composables/useFormRules.js'
 
 import { updateUser, authError, clearAuthError } from '@/Firebase.js'
 
-import { loggedUser } from '@/composables/useLoggedUser.js'
+import loggedUser  from '@/composables/useLoggedUser.js';
 
 export default {
 name: 'Edit',
 components: { ErrorSpan, ErrorModal },
 setup(){
+  const { setLoggedUser } = loggedUser()
   const route = useRoute()
   const router = useRouter()
 
@@ -121,9 +122,9 @@ setup(){
   const v$ = useVuelidate(registerRules, userFromDB)
 
   const update = async () => {
-    await updateUser(userUID, userFromDB)
-    if(!authError){
-      loggedUser.value = {...userFromDB.value, uid: userUID}
+    await updateUser(userUID, {...userFromDB.value, uid: userUID})
+    if(!authError.isError){
+      setLoggedUser({...userFromDB.value, uid: userUID})
       router.push('/')
       return
     }

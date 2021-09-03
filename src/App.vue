@@ -14,8 +14,10 @@ export default {
 
   const redirectIfNotLoggedIn = firebase.auth().onAuthStateChanged((user) => {
     if(!user) {
+      console.log('Deslogado')
       router.replace('/login')
     } else if (route.path === '/login' || route.path === '/register') {
+      console.log('logado')
       router.replace('/')
     }
   })

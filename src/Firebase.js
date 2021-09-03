@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 import { reactive } from 'vue'
-import { loggedUser } from './composables/useLoggedUser';
+import loggedUser  from './composables/useLoggedUser';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCl2WUNCRBhYILxMqLtbaoDzGz2_BHGK0M",
@@ -18,6 +18,8 @@ firebase.initializeApp(firebaseConfig)
 const db = firebase.firestore()
 const usersCollection = db.collection('users')
 
+const { setLoggedUser } = loggedUser()
+
 export const auth = firebase.auth()
 
 export const authError = reactive({
@@ -27,7 +29,7 @@ export const authError = reactive({
 
 export const clearAuthError = () => {
     authError.isError = false;
-    authError.errorMessage = ''
+    authError.message = ''
 }
 
 const getAuthErrorMessage = errorCode => ({
@@ -61,7 +63,7 @@ export const createUser = async user => {
         usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""}))
 
         const userDoc = await getUserFromDB(uid)
-        loggedUser.value = {...userDoc, uid}
+        setLoggedUser({...userDoc, uid})
     } catch(error) {
         console.log(error)
         authError.isError = true
@@ -85,7 +87,7 @@ export const doLogin = async (user) => {
         const uid = res.user.uid
 
         const userDoc = await getUserFromDB(uid)
-        loggedUser.value = {...userDoc, uid}
+        setLoggedUser({...userDoc, uid})
     } catch(error) {
         console.log(error)
         authError.isError = true
