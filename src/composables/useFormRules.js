@@ -46,3 +46,41 @@ export const registerRules = computed(()=> {
       }
     }
   })
+
+  export const editRules = computed(()=> {
+    return {
+      name: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+      },
+      cpf: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+        numeric: helpers.withMessage('Insira apenas números', numeric),
+        and: helpers.withMessage('O CPF deve conter 11 dígitos', and(maxLength(11), minLength(11)))
+      },
+      pis: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+        numeric: helpers.withMessage('Insira apenas números', numeric),
+        and: helpers.withMessage('O PIS deve conter 11 dígitos', and(maxLength(11), minLength(11)))
+      },
+      postCode: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+        numeric: helpers.withMessage('Insira apenas números', numeric),
+        and: helpers.withMessage('O CEP deve conter 8 dígitos', and(maxLength(8), minLength(8)))
+      },
+      street: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+      },
+      district: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+      },
+      city: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+      },
+      region: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+      },
+      country: {
+        required: helpers.withMessage('Campo Obrigatório', required),
+      }
+    }
+  })
