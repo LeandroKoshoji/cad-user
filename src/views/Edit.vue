@@ -2,68 +2,84 @@
   <div class="edit">
       <div class="container">
           <form class="form">
-            <span class="form__tag">Editar</span>
-            <div class="form__section flex">
-              <h3 class="form__section__title">Dados de Acesso:</h3>
-                <div class="form__item">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="exemplo@ex.com.br" required >
-                </div>
-                <div class="form__item">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" required >
-                </div>
-            </div>
+            <span class="form__tag">Cadastre-se</span>
 
             <div class="form__section flex">
               <h3 class="form__section__title">Dados Cadastrais:</h3>
                 <div class="form__item">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" placeholder="nome" required >
+                    <input type="text" id="name" placeholder="nome" required v-model="userFromDB.name">
+                    <div v-if="v$.name.$error">
+                        <ErrorSpan v-for="error in v$.name.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
-                    <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required >
+                    <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userFromDB.cpf">
+                    <div v-if="v$.cpf.$error">
+                        <ErrorSpan v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
-                    <input type="number" id="pis" required >
+                    <input type="number" id="pis" required v-model="userFromDB.pis">
+                    <div v-if="v$.pis.$error">
+                        <ErrorSpan v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
                 </div>
             </div>
 
             <div class="form__section grid">
               <h3 class="form__section__title">Endereço:</h3>
               <div class="form__item">
-                  <label for="cep">CEP:</label>
-                  <input type="text" id="cep" placeholder="8 digitos - apenas numeros" required >
+                  <label for="postCode">CEP:</label>
+                  <input type="text" id="postCode" placeholder="8 digitos - apenas numeros" required v-model="userFromDB.postCode">
+                  <div v-if="v$.postCode.$error">
+                        <ErrorSpan v-for="error in v$.postCode.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
               </div>
               <div class="form__item">
-                  <label for="adress">Rua:</label>
-                  <input type="text" id="adress" required placeholder="Rua ficticia">
+                  <label for="street">Rua:</label>
+                  <input type="text" id="street" required placeholder="Rua ficticia" v-model="userFromDB.street">
+                  <div v-if="v$.street.$error">
+                        <ErrorSpan v-for="error in v$.street.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="adressNumber">Nº:</label>
-                  <input type="number" id="adressNumber" required placeholder="123">
+                  <input type="number" id="adressNumber" placeholder="123" v-model="userFromDB.adressNumber">
               </div>
               <div class="form__item">
                   <label for="adressComplement">Complemento:</label>
-                  <input type="text" id="adressComplement" required placeholder="Apt 321">
+                  <input type="text" id="adressComplement" placeholder="Apt 321" v-model="userFromDB.adressComplement">
               </div>
               <div class="form__item">
                   <label for="district">Bairro:</label>
-                  <input type="text" id="district" required placeholder="Centro">
+                  <input type="text" id="district" required placeholder="Centro" v-model="userFromDB.district">
+                  <div v-if="v$.district.$error">
+                        <ErrorSpan v-for="error in v$.district.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="city">Município:</label>
-                  <input type="text" id="city" required placeholder="São Paulo">
+                  <input type="text" id="city" required placeholder="São Paulo" v-model="userFromDB.city">
+                  <div v-if="v$.city.$error">
+                        <ErrorSpan v-for="error in v$.city.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
               </div>
               <div class="form__item">
                   <label for="region">Estado:</label>
-                  <input type="text" id="region" required placeholder="SP">
+                  <input type="text" id="region" required placeholder="SP" v-model="userFromDB.region">
+                  <div v-if="v$.region.$error">
+                        <ErrorSpan v-for="error in v$.region.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
               </div>
               <div class="form__item">
-                  <label for="pais">País:</label>
-                  <input type="text" id="pais" required placeholder="Brasil">
+                  <label for="country">País:</label>
+                  <input type="text" id="country" required placeholder="Brasil" v-model="userFromDB.country">
+                  <div v-if="v$.country.$error">
+                        <ErrorSpan v-for="error in v$.country.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
+                    </div>
               </div>
             </div>
 
@@ -76,8 +92,32 @@
 </template>
 
 <script>
+import ErrorSpan from '@/components/ErrorSpan.vue'
+
+import { getUserFromDB } from '@/Firebase.js'
+import { onBeforeMount, ref } from 'vue'
+import { useRoute,  } from 'vue-router'
+
+import useVuelidate from '@vuelidate/core'
+import { registerRules } from '@/composables/useFormRules.js'
+
 export default {
 name: 'Edit',
+components: { ErrorSpan },
+setup(){
+  const route = useRoute()
+  // const router = useRouter()
+
+  const userFromDB = ref({})
+  const userUID = route.params.id
+
+  const v$ = useVuelidate(registerRules, userFromDB)
+  v$.value.$validate()
+
+  onBeforeMount(async ()=> userFromDB.value = await getUserFromDB(userUID))
+
+  return { v$, userFromDB }
+}
 }
 </script>
 
