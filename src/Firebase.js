@@ -47,6 +47,7 @@ export const getUserFromDB = async uid => {
 
     return userDoc.data()
    }catch (error) {
+    console.log(error)
     authError.isError = true
     authError.message = getAuthErrorMessage(error.code)
    }
@@ -62,6 +63,7 @@ export const createUser = async user => {
         const userDoc = await getUserFromDB(uid)
         loggedUser.value = {...userDoc, uid}
     } catch(error) {
+        console.log(error)
         authError.isError = true
         authError.message = getAuthErrorMessage(error.code)
     }
@@ -69,10 +71,11 @@ export const createUser = async user => {
 
 export const updateUser = async (uid, user) => {
     try{
-     await usersCollection.doc(uid).update(user)
+        await usersCollection.doc(uid).update(user)
     }catch (error) {
-     authError.isError = true
-     authError.message = getAuthErrorMessage(error.code)
+        console.log(error)
+        authError.isError = true
+        authError.message = getAuthErrorMessage(error.code)
     }
  }
 
@@ -84,6 +87,7 @@ export const doLogin = async (user) => {
         const userDoc = await getUserFromDB(uid)
         loggedUser.value = {...userDoc, uid}
     } catch(error) {
+        console.log(error)
         authError.isError = true
         authError.message = getAuthErrorMessage(error.code)
     }

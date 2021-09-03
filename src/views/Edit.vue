@@ -1,7 +1,10 @@
 <template>
   <div class="edit">
       <div class="container">
-          <form class="form">
+          <ErrorModal @closeModal="clearAuthError" v-show="authError.isError">
+            <h3>{{authError.message}}</h3>
+          </ErrorModal>
+          <form class="form" @submit.prevent="update">
             <span class="form__tag">Cadastre-se</span>
             <div class="form__section flex">
               <h3 class="form__section__title">Dados Cadastrais:</h3>
@@ -92,32 +95,46 @@
 
 <script>
 import ErrorSpan from '@/components/ErrorSpan.vue'
+import ErrorModal from '@/components/ErrorModal.vue'
 
 import { getUserFromDB } from '@/Firebase.js'
 import { onBeforeMount, ref } from 'vue'
-import { useRoute,  } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import useVuelidate from '@vuelidate/core'
 import { registerRules } from '@/composables/useFormRules.js'
 
+import { updateUser, authError, clearAuthError } from '@/Firebase.js'
+
+import { loggedUser } from '@/composables/useLoggedUser.js'
+
 export default {
 name: 'Edit',
-components: { ErrorSpan },
+components: { ErrorSpan, ErrorModal },
 setup(){
   const route = useRoute()
-  // const router = useRouter()
+  const router = useRouter()
 
   const userFromDB = ref({})
   const userUID = route.params.id
 
   const v$ = useVuelidate(registerRules, userFromDB)
+
+  const update = async () => {
+    await updateUser(userUID, userFromDB)
+    if(!authError){
+      loggedUser.value = {...userFromDB.value, uid: userUID}
+      router.push('/')
+      return
+    }
+  }
   
   onBeforeMount(async ()=> {
     userFromDB.value = await getUserFromDB(userUID)
     v$.value.$validate()
   })
 
-  return { v$, userFromDB }
+  return { v$, userFromDB, update, authError, clearAuthError }
 }
 }
 </script>

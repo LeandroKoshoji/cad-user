@@ -2,7 +2,7 @@
   <div class="register">
       <div class="container">
           <ErrorModal :isActive="authError.isError" @closeModal="clearAuthError">
-            <h1>{{authError.message}}</h1>
+            <h3>{{authError.message}}</h3>
           </ErrorModal>
           <form class="form" @submit.prevent="handleSubmit()">
             <span class="form__tag">Cadastre-se</span>
