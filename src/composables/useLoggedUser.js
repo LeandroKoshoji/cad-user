@@ -1,12 +1,27 @@
 import { ref, computed, watch} from 'vue'
 
 const STATE_NAME = 'userState'
+const defaultState = {
+    email: '',
+    password: '',
+    name: '',
+    cpf: null,
+    pis: null,
+    postCode: null,
+    street: '',
+    adressNumber: null,
+    adressComplement: '',
+    district: '',
+    city: '',
+    region: '',
+    country: ''
+  }
 
 const getDefaultUserState = () => {
     if(sessionStorage.getItem(STATE_NAME) !== null) {
         return JSON.parse(sessionStorage.getItem(STATE_NAME))
     }
-    return null
+    return defaultState
 }
 const state = ref(getDefaultUserState()) 
 

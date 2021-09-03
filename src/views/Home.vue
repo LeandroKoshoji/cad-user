@@ -34,12 +34,12 @@ export default {
   align-items: center;
 
   &__welcome{
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     text-align: center;
     margin-bottom: 1rem;
 
     &--small {
-      font-size: 1.25rem;
+      font-size: clamp(.75rem, 2vw, 1.25rem);
       font-weight: 400;
       text-align: center;
       margin-bottom: 2rem;
