@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="container">
-      <h1 class="home__welcome">Olá, Leandro</h1>
+      <h1 class="home__welcome">Olá, {{loggedUser.name}}</h1>
       <h2 class="home__welcome--small">O que deseja fazer?</h2>
       <div class="home__buttons">
-        <router-link to="/edit/123" type="button" class="home__buttons__btn neutral">Editar cadastro</router-link>
+        <router-link :to="`/edit/${loggedUser.uid}`" type="button" class="home__buttons__btn neutral">Editar cadastro</router-link>
         <button type="button" class="home__buttons__btn accent" @click="doLogout">Sair</button>
       </div>
     </div>
@@ -12,12 +12,14 @@
 </template>
 
 <script>
+import { loggedUser } from '@/composables/useLoggedUser.js'
 import { doLogout } from '@/Firebase.js'
+
 export default {
   name: 'Home',
   setup() {
-
-    return { doLogout }
+    
+    return { doLogout, loggedUser }
   }
 }
 </script>

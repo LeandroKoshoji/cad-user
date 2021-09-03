@@ -3,6 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 import { reactive } from 'vue'
+import { loggedUser } from './composables/useLoggedUser';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCl2WUNCRBhYILxMqLtbaoDzGz2_BHGK0M",
@@ -17,7 +18,7 @@ firebase.initializeApp(firebaseConfig)
 const db = firebase.firestore()
 const usersCollection = db.collection('users')
 
-const auth = firebase.auth()
+export const auth = firebase.auth()
 
 export const authError = reactive({
     isError: false,
@@ -40,25 +41,37 @@ const getAuthErrorMessage = errorCode => ({
 
 })[errorCode] || 'Erro inesperado, tente novamente'
 
-export const createUser = user => {
-    auth.createUserWithEmailAndPassword(user.email, user.password)
-        .then(userCredential => {
-            const uid = userCredential.user.uid
-
-            usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""}))
-        })
-        .catch(error => {
-            authError.isError = true
-            authError.message = getAuthErrorMessage(error.code)
-        })
+export const getUserFromDB = async uid => {
+    const userDoc = await usersCollection.doc(uid).get()
+    return userDoc ? userDoc.data() : 'Erro'
 }
 
-export const doLogin = (user) => {
-    auth.signInWithEmailAndPassword(user.email, user.password)
-        .then()
-        .catch(error => {
-            authError.isError = true
-            authError.message = getAuthErrorMessage(error.code)
-        })
+export const createUser = async user => {
+    try {
+        const res = await auth.createUserWithEmailAndPassword(user.email, user.password)
+        const uid = res.user.uid
+
+        usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""}))
+        
+        const userDoc = await getUserFromDB(uid)
+        loggedUser.value = {...userDoc, uid}
+    } catch(error) {
+        authError.isError = true
+        authError.message = getAuthErrorMessage(error.code)
+    }
 }
+
+export const doLogin = async (user) => {
+    try{
+        const res = await auth.signInWithEmailAndPassword(user.email, user.password)
+        const uid = res.user.uid
+
+        const userDoc = await getUserFromDB(uid)
+        loggedUser.value = {...userDoc, uid}
+    } catch(error) {
+        authError.isError = true
+        authError.message = getAuthErrorMessage(error.code)
+    }
+}
+
 export const doLogout = () => auth.signOut()
