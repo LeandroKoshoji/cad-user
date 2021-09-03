@@ -128,7 +128,7 @@ setup(){
         return
       }
     }
-    return console.log(v$.value.$errors)
+    return alert('Verifique os dados do formulário')
   }
 
   const deleteUser = async () => {
