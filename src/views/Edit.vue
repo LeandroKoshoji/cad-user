@@ -86,7 +86,7 @@
             </div>
 
             <button type="submit" class="form__btn neutral">Editar</button>
-            <button type="button" class="form__btn accent">Excluir Usuário</button>
+            <button type="button" class="form__btn accent" @click="deleteUser">Excluir Usuário</button>
             <router-link to="/">Voltar para página principal</router-link>
           </form>
       </div>
@@ -99,12 +99,12 @@ import ErrorModal from '@/components/ErrorModal.vue'
 
 import { getUserFromDB } from '@/Firebase.js'
 import { onBeforeMount, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 import useVuelidate from '@vuelidate/core'
 import { registerRules } from '@/composables/useFormRules.js'
 
-import { updateUser, authError, clearAuthError } from '@/Firebase.js'
+import { updateUserDoc, deleteUserLogin,  authError, clearAuthError, auth } from '@/Firebase.js'
 
 import loggedUser  from '@/composables/useLoggedUser.js';
 
@@ -113,29 +113,33 @@ name: 'Edit',
 components: { ErrorSpan, ErrorModal },
 setup(){
   const { setLoggedUser } = loggedUser()
-  const route = useRoute()
   const router = useRouter()
-
   const userFromDB = ref({})
-  const userUID = route.params.id
+  let userUID 
 
   const v$ = useVuelidate(registerRules, userFromDB)
 
   const update = async () => {
-    await updateUser(userUID, {...userFromDB.value, uid: userUID})
+    await updateUserDoc(userUID, {...userFromDB.value, uid: userUID})
     if(!authError.isError){
       setLoggedUser({...userFromDB.value, uid: userUID})
       router.push('/')
       return
     }
   }
+
+  const deleteUser = async () => {
+    await deleteUserLogin()
+    if(authError.isError) return
+  }
   
   onBeforeMount(async ()=> {
+    userUID = auth.currentUser.uid
     userFromDB.value = await getUserFromDB(userUID)
     v$.value.$validate()
   })
 
-  return { v$, userFromDB, update, authError, clearAuthError }
+  return { v$, userFromDB, update, authError, clearAuthError, deleteUser }
 }
 }
 </script>

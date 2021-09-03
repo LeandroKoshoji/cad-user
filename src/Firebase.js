@@ -71,7 +71,7 @@ export const createUser = async user => {
     }
 }
 
-export const updateUser = async (uid, user) => {
+export const updateUserDoc = async (uid, user) => {
     try{
         await usersCollection.doc(uid).update(user)
     }catch (error) {
@@ -96,3 +96,14 @@ export const doLogin = async (user) => {
 }
 
 export const doLogout = () => auth.signOut()
+
+export const deleteUserLogin = async () => {
+    try{
+        await auth.currentUser.delete()
+        alert('Usuário excluído')
+    } catch(error) {
+        console.log(error)
+        authError.isError = true
+        authError.message = getAuthErrorMessage(error.code)
+    }
+}
