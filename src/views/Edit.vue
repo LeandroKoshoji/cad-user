@@ -104,7 +104,7 @@ import { useRouter } from 'vue-router'
 import useVuelidate from '@vuelidate/core'
 import { registerRules } from '@/composables/useFormRules.js'
 
-import { updateUserDoc, deleteUserLogin,  authError, clearAuthError, auth } from '@/Firebase.js'
+import { updateUserDoc, deleteUserLogin, deleteUserDoc, authError, clearAuthError, auth } from '@/Firebase.js'
 
 import loggedUser  from '@/composables/useLoggedUser.js';
 
@@ -130,7 +130,10 @@ setup(){
 
   const deleteUser = async () => {
     await deleteUserLogin()
-    if(authError.isError) return
+    if(!authError.isError) {
+      deleteUserDoc(userUID)
+      return
+    }
   }
   
   onBeforeMount(async ()=> {

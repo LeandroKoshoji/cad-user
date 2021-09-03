@@ -81,6 +81,15 @@ export const updateUserDoc = async (uid, user) => {
     }
  }
 
+export const deleteUserDoc = async (uid) => {
+    try{
+        await usersCollection.doc(uid).delete()
+    } catch (error) {
+        console.log(error)
+        authError.isError = true
+        authError.message = getAuthErrorMessage(error.code)
+    }
+} 
 export const doLogin = async (user) => {
     try{
         const res = await auth.signInWithEmailAndPassword(user.email, user.password)
