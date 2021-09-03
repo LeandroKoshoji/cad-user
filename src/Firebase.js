@@ -92,6 +92,7 @@ export const deleteUserDoc = async (uid) => {
 } 
 export const doLogin = async (user) => {
     try{
+        await auth.setPersistence('session')
         const res = await auth.signInWithEmailAndPassword(user.email, user.password)
         const uid = res.user.uid
 
