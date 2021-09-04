@@ -7,6 +7,7 @@ const cpfRegex = helpers.regex(/(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/)
 const pisRegex = helpers.regex(/(\d{3})[.]?(\d{5})[.]?(\d{2})[-]?(\d)/)
 const cepRegex = helpers.regex(/(\d{2}[.]?\d{3})[-]?(\d{3})/)
 const locationsRegex = helpers.regex(/^([a-zA-ZÀ-ú']{2,40}(\s+|$)){1,}$/)
+
 export const registerRules = computed(()=> {
     return {
       email: { 
