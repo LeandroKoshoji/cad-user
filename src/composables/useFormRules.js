@@ -40,19 +40,19 @@ export const registerRules = computed(()=> {
       },
       district: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações e/ou números', locationsRegex)
       },
       city: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações e/ou números', locationsRegex)
       },
       region: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações e/ou números', locationsRegex)
       },
       country: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('País inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('País inválido, não use abreviações e/ou números', locationsRegex)
       }
     }
   })
@@ -81,19 +81,19 @@ export const registerRules = computed(()=> {
       },
       district: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações e/ou números', locationsRegex)
       },
       city: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações e/ou números', locationsRegex)
       },
       region: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações e/ou números', locationsRegex)
       },
       country: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('País inválido, não use abreviações', locationsRegex)
+        locationsRegex: helpers.withMessage('País inválido, não use abreviações e/ou números', locationsRegex)
       }
     }
   })
