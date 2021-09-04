@@ -57,43 +57,43 @@ export const registerRules = computed(()=> {
     }
   })
 
-  export const editRules = computed(()=> {
-    return {
-      name: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        nameRegex: helpers.withMessage('Nome inválido', nameRegex),
-        fullNameRegex: helpers.withMessage('Digito nome e sobrenome sem abreviações', fullNameRegex)
-      },
-      cpf: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        cpfRegex: helpers.withMessage('CPF Inválido | Deve conter 11 dígitos', cpfRegex),
-      },
-      pis: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        pisRegex: helpers.withMessage('PIS Inválido | Deve conter 11 dígitos', pisRegex)
-      },
-      postCode: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        cepRegex: helpers.withMessage('CEP Inválido | Deve conter 8 dígitos', cepRegex)
-      },
-      street: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-      },
-      district: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações e/ou números', locationsRegex)
-      },
-      city: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações e/ou números', locationsRegex)
-      },
-      region: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações e/ou números', locationsRegex)
-      },
-      country: {
-        required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('País inválido, não use abreviações e/ou números', locationsRegex)
-      }
+export const editRules = computed(()=> {
+  return {
+    name: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      nameRegex: helpers.withMessage('Nome inválido', nameRegex),
+      fullNameRegex: helpers.withMessage('Digito nome e sobrenome sem abreviações', fullNameRegex)
+    },
+    cpf: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      cpfRegex: helpers.withMessage('CPF Inválido | Deve conter 11 dígitos', cpfRegex),
+    },
+    pis: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      pisRegex: helpers.withMessage('PIS Inválido | Deve conter 11 dígitos', pisRegex)
+    },
+    postCode: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      cepRegex: helpers.withMessage('CEP Inválido | Deve conter 8 dígitos', cepRegex)
+    },
+    street: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+    },
+    district: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações e/ou números', locationsRegex)
+    },
+    city: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações e/ou números', locationsRegex)
+    },
+    region: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      locationsRegex: helpers.withMessage('Estado inválido, não use abreviações e/ou números', locationsRegex)
+    },
+    country: {
+      required: helpers.withMessage('Campo Obrigatório', required),
+      locationsRegex: helpers.withMessage('País inválido, não use abreviações e/ou números', locationsRegex)
     }
-  })
+  }
+})
