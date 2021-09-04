@@ -23,13 +23,12 @@ const getDefaultUserState = () => {
     }
     return defaultState
 }
+
 const state = ref(getDefaultUserState()) 
 
 const useLoggedUser = () => {
-    const setLoggedUser = (value) => {
-        state.value = value
-    }
-
+    const setLoggedUser = (value) => state.value = value
+    
     watch(state, ()=> {
         sessionStorage.setItem(STATE_NAME, JSON.stringify(state.value))
     })
