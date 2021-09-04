@@ -79,6 +79,7 @@ export const updateUserDoc = async (uid, user) => {
         authError.message = getAuthErrorMessage(error.code)
     }
  }
+ 
 export const deleteUserDoc = async (uid) => {
     try{
         await usersCollection.doc(uid).delete()
@@ -88,6 +89,7 @@ export const deleteUserDoc = async (uid) => {
         authError.message = getAuthErrorMessage(error.code)
     }
 } 
+
 export const doLogin = async (user) => {
     try{
         await auth.setPersistence('session')
