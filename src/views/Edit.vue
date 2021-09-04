@@ -5,7 +5,7 @@
             <h3>{{authError.message}}</h3>
           </ErrorModal>
           <form class="form" @submit.prevent="update">
-            <span class="form__tag">Cadastre-se</span>
+            <span class="form__tag">Editar Cadastro</span>
             <div class="form__section flex">
               <h3 class="form__section__title">Dados Cadastrais:</h3>
                 <div class="form__item">
