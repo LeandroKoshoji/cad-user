@@ -16,11 +16,12 @@ import useLoggedUser from '@/composables/useLoggedUser.js'
 import { doLogout } from '@/Firebase.js'
 
 export default {
-  name: 'Home',
-  setup() {
-    const { loggedUser } = useLoggedUser()
-    return { doLogout, loggedUser }
-  }
+name: 'Home',
+setup() {
+  const { loggedUser } = useLoggedUser()
+  
+  return { doLogout, loggedUser }
+}
 }
 </script>
 
