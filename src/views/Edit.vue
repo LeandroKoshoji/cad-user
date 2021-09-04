@@ -98,13 +98,18 @@ import ErrorSpan from '@/components/ErrorSpan.vue'
 import ErrorModal from '@/components/ErrorModal.vue'
 
 import { getUserFromDB } from '@/Firebase.js'
-import { onMounted, ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 import useVuelidate from '@vuelidate/core'
 import { editRules } from '@/composables/useFormRules.js'
 
-import { updateUserDoc, deleteUserLogin, deleteUserDoc, authError, clearAuthError } from '@/Firebase.js'
+import { 
+  updateUserDoc, 
+  deleteUserLogin, 
+  deleteUserDoc, 
+  authError, 
+  clearAuthError } from '@/Firebase.js'
 
 import loggedUser  from '@/composables/useLoggedUser.js';
 
@@ -121,9 +126,13 @@ setup(){
   const v$ = useVuelidate(editRules, userFromDB)
 
   const update = async () => {
-    if(!v$.value.$error){
+    const hasFormError = !v$.value.$error
+
+    if(hasFormError){
+      const hasAuthError = !authError.isError
+
       await updateUserDoc(userUID, {...userFromDB.value, uid: userUID})
-      if(!authError.isError){
+      if(hasAuthError){
         setLoggedUser({...userFromDB.value, uid: userUID})
         router.push('/')
         return
@@ -133,19 +142,21 @@ setup(){
   }
 
   const deleteUser = async () => {
+    const hasAuthError = !authError.isError
+
     await deleteUserLogin()
-    if(!authError.isError) {
+    if(hasAuthError) {
       deleteUserDoc(userUID)
       return
     }
   }
   
-  onMounted(async ()=> {
+  onBeforeMount(async ()=> {
     userFromDB.value = await getUserFromDB(userUID)
     v$.value.$validate()
   })
 
-  return { v$, userFromDB, update, authError, clearAuthError, deleteUser }
+  return { userFromDB, v$, update, deleteUser, authError, clearAuthError }
 }
 }
 </script>

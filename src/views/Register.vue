@@ -145,6 +145,7 @@ setup(){
 
   const handleSubmit = () => {
     const hasFormError = !v$.value.$error
+    
     if(hasFormError) {
       createUser(userData)
       return
