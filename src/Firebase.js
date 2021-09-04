@@ -20,7 +20,7 @@ const usersCollection = db.collection('users')
 
 const { setLoggedUser } = loggedUser()
 
-export const auth = firebase.auth()
+const auth = firebase.auth()
 
 export const authError = reactive({
     isError: false,
@@ -40,7 +40,6 @@ const getAuthErrorMessage = errorCode => ({
     "auth/user-disabled": "Erro:  email utilizado foi desabilitado em nosso sistema, por favor, faça um novo cadastro",
     "auth/user-not-found": "Erro: usuário não encontrado, verifique o e-mail digitado, ou cadastre-se para acessar a aplicação",
     "auth/wrong-password": "Erro: senha incorreta"
-
 })[errorCode] || 'Erro inesperado, tente novamente'
 
 export const getUserFromDB = async uid => {
@@ -60,7 +59,7 @@ export const createUser = async user => {
         const res = await auth.createUserWithEmailAndPassword(user.email, user.password)
         const uid = res.user.uid
 
-        usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""}))
+        usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""})) // Passando informações do Usuário, exceto Senha
 
         const userDoc = await getUserFromDB(uid)
         setLoggedUser({...userDoc, uid})
@@ -80,7 +79,6 @@ export const updateUserDoc = async (uid, user) => {
         authError.message = getAuthErrorMessage(error.code)
     }
  }
-
 export const deleteUserDoc = async (uid) => {
     try{
         await usersCollection.doc(uid).delete()
@@ -96,7 +94,7 @@ export const doLogin = async (user) => {
         const res = await auth.signInWithEmailAndPassword(user.email, user.password)
         const uid = res.user.uid
 
-        const userDoc = await getUserFromDB(uid)
+        const userDoc = await getUserFromDB(uid) // Depois de logar, preencho o userState com informações do BD.
         setLoggedUser({...userDoc, uid})
     } catch(error) {
         console.log(error)
