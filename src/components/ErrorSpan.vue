@@ -1,5 +1,5 @@
 <template>
-  <span class="error-message">
+  <span class="error-span">
       <slot> </slot>
   </span>
 </template>
@@ -10,11 +10,15 @@ name: 'ErrorSpan'
 }
 </script>
 
-<style>
-.error-message {
-    font-weight: 700;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--clr-secundary);
+<style lang="scss" scoped>
+.error-span {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--clr-secundary);
+
 }
 </style>

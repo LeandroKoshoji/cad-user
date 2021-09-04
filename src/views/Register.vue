@@ -35,7 +35,7 @@
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
-                    <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userData.cpf">
+                    <input type="text" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userData.cpf">
                     <div v-if="v$.cpf.$error">
                         <ErrorSpan v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
