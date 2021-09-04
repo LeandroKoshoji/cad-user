@@ -10,7 +10,7 @@ import { onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 
 export default {
- setup(){
+setup(){
   const route = useRoute()
   const router = useRouter()
 

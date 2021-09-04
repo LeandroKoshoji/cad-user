@@ -25,8 +25,10 @@
 
 <script>
 import ErrorModal from '@/components/ErrorModal.vue'
+
 import { reactive } from 'vue'
 import { doLogin, authError, clearAuthError } from '@/Firebase.js'
+
 export default {
 name: 'Login',
 components: { ErrorModal },
@@ -36,9 +38,7 @@ setup(){
         password: "",
     })
 
-    const handleSubmit = () => {
-        doLogin(userData)
-    }
+    const handleSubmit = () => doLogin(userData) 
 
     return { userData, handleSubmit, authError, clearAuthError }
 }
