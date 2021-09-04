@@ -42,7 +42,7 @@
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
-                    <input type="number" id="pis" required v-model="userData.pis">
+                    <input type="text" id="pis" required v-model="userData.pis">
                     <div v-if="v$.pis.$error">
                         <ErrorSpan v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
