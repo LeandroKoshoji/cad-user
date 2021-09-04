@@ -60,6 +60,7 @@ export default {
       font-weight: 700;
       cursor: pointer;
       box-shadow: var(--box-shadow);
+      text-decoration: none;
 
       &.neutral {
         background-color: var(--clr-secundary);

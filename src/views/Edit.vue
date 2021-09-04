@@ -17,14 +17,14 @@
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
-                    <input type="number" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userFromDB.cpf">
+                    <input type="text" id="cpf" placeholder="11 dígitos" required v-model="userFromDB.cpf">
                     <div v-if="v$.cpf.$error">
                         <ErrorSpan v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
-                    <input type="number" id="pis" required v-model="userFromDB.pis">
+                    <input type="text" id="pis" placeholder="11 dígitos" required v-model="userFromDB.pis">
                     <div v-if="v$.pis.$error">
                         <ErrorSpan v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
@@ -195,7 +195,7 @@ setup(){
         justify-content: space-between;
         align-items: center;
 
-        @media (max-width: 767px) {
+        @media (max-width: 825px) {
         flex-direction: column;
         }
       }
