@@ -21,7 +21,7 @@ export const registerRules = computed(()=> {
       name: {
         required: helpers.withMessage('Campo Obrigatório', required),
         nameRegex: helpers.withMessage('Nome inválido', nameRegex),
-        fullNameRegex: helpers.withMessage('Digito nome e sobrenome', fullNameRegex)
+        fullNameRegex: helpers.withMessage('Digito nome e sobrenome sem abreviações', fullNameRegex)
       },
       cpf: {
         required: helpers.withMessage('Campo Obrigatório', required),
@@ -40,19 +40,19 @@ export const registerRules = computed(()=> {
       },
       district: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Bairro inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações', locationsRegex)
       },
       city: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Cidade inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações', locationsRegex)
       },
       region: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Estado inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações', locationsRegex)
       },
       country: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('País inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('País inválido, não use abreviações', locationsRegex)
       }
     }
   })
@@ -62,7 +62,7 @@ export const registerRules = computed(()=> {
       name: {
         required: helpers.withMessage('Campo Obrigatório', required),
         nameRegex: helpers.withMessage('Nome inválido', nameRegex),
-        fullNameRegex: helpers.withMessage('Digito nome e sobrenome', fullNameRegex)
+        fullNameRegex: helpers.withMessage('Digito nome e sobrenome sem abreviações', fullNameRegex)
       },
       cpf: {
         required: helpers.withMessage('Campo Obrigatório', required),
@@ -81,19 +81,19 @@ export const registerRules = computed(()=> {
       },
       district: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Bairro inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('Bairro inválido, não use abreviações', locationsRegex)
       },
       city: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Cidade inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('Cidade inválido, não use abreviações', locationsRegex)
       },
       region: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('Estado inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('Estado inválido, não use abreviações', locationsRegex)
       },
       country: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        locationsRegex: helpers.withMessage('País inválido', locationsRegex)
+        locationsRegex: helpers.withMessage('País inválido, não use abreviações', locationsRegex)
       }
     }
   })

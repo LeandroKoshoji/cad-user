@@ -141,10 +141,11 @@ setup(){
   })
 
   const v$ = useVuelidate(registerRules, userData)
-  v$.value.$validate()
+  v$.value.$validate() // Valida os campos reativos do usuário quando o componente é criado
 
   const handleSubmit = () => {
-    if(!v$.value.$error) {
+    const hasFormError = !v$.value.$error
+    if(hasFormError) {
       createUser(userData)
       return
     } 
