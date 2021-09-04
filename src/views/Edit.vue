@@ -99,12 +99,12 @@ import ErrorModal from '@/components/ErrorModal.vue'
 
 import { getUserFromDB } from '@/Firebase.js'
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 import useVuelidate from '@vuelidate/core'
 import { editRules } from '@/composables/useFormRules.js'
 
-import { updateUserDoc, deleteUserLogin, deleteUserDoc, authError, clearAuthError, auth } from '@/Firebase.js'
+import { updateUserDoc, deleteUserLogin, deleteUserDoc, authError, clearAuthError } from '@/Firebase.js'
 
 import loggedUser  from '@/composables/useLoggedUser.js';
 
@@ -113,9 +113,10 @@ name: 'Edit',
 components: { ErrorSpan, ErrorModal },
 setup(){
   const { setLoggedUser } = loggedUser()
+  const route = useRoute()
   const router = useRouter()
   const userFromDB = ref({})
-  let userUID 
+  const userUID = route.params.id
 
   const v$ = useVuelidate(editRules, userFromDB)
 
@@ -140,7 +141,6 @@ setup(){
   }
   
   onMounted(async ()=> {
-    userUID = auth.currentUser.uid
     userFromDB.value = await getUserFromDB(userUID)
     v$.value.$validate()
   })
