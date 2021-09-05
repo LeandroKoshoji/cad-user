@@ -1,11 +1,8 @@
-import { helpers, required, email, minLength } from '@vuelidate/validators'
+import { helpers, required, email, minLength, maxLength, numeric, and } from '@vuelidate/validators'
 import { computed } from 'vue'
 
 const nameRegex = helpers.regex(/^[a-zA-ZÀ-ú']{2,40}/)
 const fullNameRegex = helpers.regex(/^([a-zA-ZÀ-ú']{2,40}(\s+|$)){2,}$/)
-const cpfRegex = helpers.regex(/(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/)
-const pisRegex = helpers.regex(/(\d{3})[.]?(\d{5})[.]?(\d{2})[-]?(\d)/)
-const cepRegex = helpers.regex(/(\d{2}[.]?\d{3})[-]?(\d{3})/)
 const locationsRegex = helpers.regex(/^([a-zA-ZÀ-ú']{2,40}(\s+|$)){1,}$/)
 
 export const registerRules = computed(()=> {
@@ -25,15 +22,18 @@ export const registerRules = computed(()=> {
       },
       cpf: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        cpfRegex: helpers.withMessage('CPF Inválido | Deve conter 11 dígitos', cpfRegex),
+        numeric: helpers.withMessage('Insira apenas números', numeric),
+        and: helpers.withMessage('CPF deve conter 11 dígitos', and(minLength(11), maxLength(11))),
       },
       pis: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        pisRegex: helpers.withMessage('PIS Inválido | Deve conter 11 dígitos', pisRegex)
+        numeric: helpers.withMessage('Insira apenas números', numeric),
+        and: helpers.withMessage('PIS deve conter 11 dígitos', and(minLength(11), maxLength(11)))
       },
       postCode: {
         required: helpers.withMessage('Campo Obrigatório', required),
-        cepRegex: helpers.withMessage('CEP Inválido | Deve conter 8 dígitos', cepRegex)
+        numeric: helpers.withMessage('Insira apenas números', numeric),
+        and: helpers.withMessage('CEP deve conter 8 dígitos', and(minLength(8), maxLength(8)))
       },
       street: {
         required: helpers.withMessage('Campo Obrigatório', required),
@@ -66,15 +66,18 @@ export const editRules = computed(()=> {
     },
     cpf: {
       required: helpers.withMessage('Campo Obrigatório', required),
-      cpfRegex: helpers.withMessage('CPF Inválido | Deve conter 11 dígitos', cpfRegex),
+      numeric: helpers.withMessage('Insira apenas números', numeric),
+      and: helpers.withMessage('CPF deve conter 11 dígitos', and(minLength(11), maxLength(11))),
     },
     pis: {
       required: helpers.withMessage('Campo Obrigatório', required),
-      pisRegex: helpers.withMessage('PIS Inválido | Deve conter 11 dígitos', pisRegex)
+      numeric: helpers.withMessage('Insira apenas números', numeric),
+      and: helpers.withMessage('PIS deve conter 11 dígitos', and(minLength(11), maxLength(11)))
     },
     postCode: {
       required: helpers.withMessage('Campo Obrigatório', required),
-      cepRegex: helpers.withMessage('CEP Inválido | Deve conter 8 dígitos', cepRegex)
+      numeric: helpers.withMessage('Insira apenas números', numeric),
+      and: helpers.withMessage('CEP deve conter 8 dígitos', and(minLength(8), maxLength(8)))
     },
     street: {
       required: helpers.withMessage('Campo Obrigatório', required),
