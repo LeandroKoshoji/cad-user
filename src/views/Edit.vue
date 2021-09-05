@@ -126,13 +126,13 @@ setup(){
   const v$ = useVuelidate(editRules, userFromDB)
 
   const update = async () => {
-    const hasFormError = !v$.value.$error
+    const hasNotFormError = !v$.value.$error
 
-    if(hasFormError){
-      const hasAuthError = !authError.isError
+    if(hasNotFormError){
+      const hasNotAuthError = !authError.isError
 
       await updateUserDoc(userUID, {...userFromDB.value, uid: userUID})
-      if(hasAuthError){
+      if(hasNotAuthError){
         setLoggedUser({...userFromDB.value, uid: userUID})
         router.push('/')
         return
@@ -142,10 +142,10 @@ setup(){
   }
 
   const deleteUser = async () => {
-    const hasAuthError = !authError.isError
+    const hasNotAuthError = !authError.isError
 
     await deleteUserLogin()
-    if(hasAuthError) {
+    if(hasNotAuthError) {
       deleteUserDoc(userUID)
       return
     }
