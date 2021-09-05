@@ -13,7 +13,7 @@ describe('Home', () => {
         expect(welcome.html()).toContain(`Olá, ${loggedUser.name}`)
     })
 
-    it('Route', () => {
+    it('Router link receives user Uid as parameter', () => {
         const wrapper = mount(Home)
 
         const loggedUser = wrapper.vm.loggedUser
