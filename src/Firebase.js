@@ -20,8 +20,6 @@ const usersCollection = db.collection('users')
 
 const { setLoggedUser } = loggedUser()
 
-const auth = firebase.auth()
-
 export const authError = reactive({
     isError: false,
     message: ''
@@ -56,7 +54,7 @@ export const getUserFromDB = async uid => {
 
 export const createUser = async user => {
     try {
-        const res = await auth.createUserWithEmailAndPassword(user.email, user.password)
+        const res = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
         const uid = res.user.uid
 
         usersCollection.doc(uid).set(Object.assign({}, {...user, password: ""})) // Passando informações do Usuário, exceto Senha
@@ -92,8 +90,8 @@ export const deleteUserDoc = async (uid) => {
 
 export const doLogin = async (user) => {
     try{
-        await auth.setPersistence('session')
-        const res = await auth.signInWithEmailAndPassword(user.email, user.password)
+        await firebase.auth().setPersistence('session')
+        const res = await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         const uid = res.user.uid
 
         const userDoc = await getUserFromDB(uid) // Depois de logar, preencho o userState com informações do BD.
@@ -105,11 +103,11 @@ export const doLogin = async (user) => {
     }
 }
 
-export const doLogout = () => auth.signOut()
+export const doLogout = () => firebase.auth().signOut()
 
 export const deleteUserLogin = async () => {
     try{
-        await auth.currentUser.delete()
+        await firebase.auth().currentUser.delete()
         alert('Usuário excluído')
     } catch(error) {
         console.log(error)
