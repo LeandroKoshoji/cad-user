@@ -31,3 +31,4 @@ pnpm-debug.log*
 *.cache
 .firebase/hosting.ZGlzdA.cache
 .firebaserc
+*.cache
