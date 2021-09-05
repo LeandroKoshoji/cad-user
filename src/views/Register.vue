@@ -28,21 +28,21 @@
               <h3 class="form__section__title">Dados Cadastrais:</h3>
                 <div class="form__item">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" placeholder="nome" required v-model="userData.name">
+                    <input type="text" id="name" placeholder="Nome Completo" required v-model="userData.name">
                     <div v-if="v$.name.$error">
                         <ErrorSpan v-for="error in v$.name.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
                 <div class="form__item">
                     <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" placeholder="11 digitos - apenas numeros" required v-model="userData.cpf">
+                    <input type="text" id="cpf" placeholder="11 dígitos - somente numeros" required v-model="userData.cpf">
                     <div v-if="v$.cpf.$error">
                         <ErrorSpan v-for="error in v$.cpf.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
                 </div>
                 <div class="form__item">
                     <label for="pis">PIS:</label>
-                    <input type="text" id="pis" required v-model="userData.pis">
+                    <input type="text" id="pis" placeholder="11 dígitos - somente numeros" required v-model="userData.pis">
                     <div v-if="v$.pis.$error">
                         <ErrorSpan v-for="error in v$.pis.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
@@ -53,14 +53,14 @@
               <h3 class="form__section__title">Endereço:</h3>
               <div class="form__item">
                   <label for="postCode">CEP:</label>
-                  <input type="text" id="postCode" placeholder="8 digitos - apenas numeros" required v-model="userData.postCode">
+                  <input type="text" id="postCode" placeholder="8 dígitos - somente numeros" required v-model="userData.postCode">
                   <div v-if="v$.postCode.$error">
                         <ErrorSpan v-for="error in v$.postCode.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
               </div>
               <div class="form__item">
                   <label for="street">Rua:</label>
-                  <input type="text" id="street" required placeholder="Rua ficticia" v-model="userData.street">
+                  <input type="text" id="street" required placeholder="Rua exemplo" v-model="userData.street">
                   <div v-if="v$.street.$error">
                         <ErrorSpan v-for="error in v$.street.$errors" :key="error.$uid"> {{error.$message}}</ErrorSpan>
                     </div>
