@@ -6,12 +6,12 @@ import { reactive } from 'vue'
 import loggedUser  from './composables/useLoggedUser';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCl2WUNCRBhYILxMqLtbaoDzGz2_BHGK0M",
-    authDomain: "desafio-pontotel.firebaseapp.com",
-    projectId: "desafio-pontotel",
-    storageBucket: "desafio-pontotel.appspot.com",
-    messagingSenderId: "657773440248",
-    appId: "1:657773440248:web:c364ca324bdb23799bdf0d"
+    apiKey: "AIzaSyDoxq-1JyLuwYkd6EqyN4P0fpDfkHGGPtM",
+    authDomain: "cad-user-598ec.firebaseapp.com",
+    projectId: "cad-user-598ec",
+    storageBucket: "cad-user-598ec.appspot.com",
+    messagingSenderId: "908766054542",
+    appId: "1:908766054542:web:96892f0f283946028d61df"
   };
 firebase.initializeApp(firebaseConfig)
 
