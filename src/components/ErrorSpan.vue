@@ -1,6 +1,6 @@
 <template>
   <span class="error-span">
-      <slot> </slot>
+      <slot/>
   </span>
 </template>
 
