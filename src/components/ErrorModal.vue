@@ -14,10 +14,8 @@ export default {
 name: 'ErrorModal',
 props: ['isActive'],
 setup(props, { emit }) {
-    const closeModal = () => {
-        emit('closeModal')
-    }
-
+    const closeModal = () => emit('closeModal')
+    
     return { closeModal }
 }
 }
