@@ -144,9 +144,9 @@ setup(){
   v$.value.$validate() // Valida os campos reativos do usuário quando o componente é criado
 
   const handleSubmit = () => {
-    const hasFormError = !v$.value.$error
+    const hasNotFormError = !v$.value.$error
     
-    if(hasFormError) {
+    if(hasNotFormError) {
       createUser(userData)
       return
     } 
