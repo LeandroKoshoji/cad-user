@@ -5,7 +5,7 @@
             <h3>{{authError.message}}</h3>    
         </ErrorModal>
           <h1 class="login__welcome">Olá Visitante,</h1>
-          <h2 class="login__welcome--small">Faça o Login ou Cadastre-se para acessar o conteudo.</h2>
+          <h2 class="login__welcome--small">Faça o Login ou Cadastre-se para acessar o conteúdo.</h2>
           <form class="form" @submit.prevent="handleSubmit">
                 <span class="form__tag">Login</span>
                 <div class="form__item">
